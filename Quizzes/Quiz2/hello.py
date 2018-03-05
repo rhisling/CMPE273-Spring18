@@ -26,7 +26,7 @@ def add_users():
             dict_user["id"] = list_of_dict[len(list_of_dict) - 1]["id"] + 1
             dict_user["name"] = request.form["name"]
             list_of_dict.append(dict_user)
-        return jsonify(*list_of_dict)
+        return jsonify(201,*list_of_dict)
 
 
 @app.route('/users/<id>', methods=['GET', 'DELETE'])  # curl -i -X GET http://127.0.0.1:5000/users/1
@@ -37,7 +37,7 @@ def get_user_id(id):
         if list_of_dict:
             for item in list_of_dict:
                 if item["id"] == int(id):
-                    return jsonify(item)
+                    return jsonify(200,item)
             else:
                 return "ID not matched\n"
         else:
@@ -48,7 +48,7 @@ def get_user_id(id):
                 print(item["id"])
                 if item["id"] == int(id):
                     list_of_dict.pop(index)
-                    return jsonify(*list_of_dict)
+                    return jsonify(204,*list_of_dict)
             else:
                 return "item not found"
 
